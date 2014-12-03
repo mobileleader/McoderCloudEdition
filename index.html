@@ -1,0 +1,421 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mcoder Api Test Page!</title>
+<style type="text/css">
+
+/** global css **/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+header {
+	width: 1100px;
+	height: 120px;
+	margin: 0 auto;
+	font-size: 50px;
+	color: black;
+	text-align: center;
+	background-color: white;
+}
+
+#content {
+	width: 1100px;
+	/* 	height:400px; */
+	/* background: gray; */
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#content>#left {
+	width: 190px;
+	/* height:400px; */
+	background: white;
+	float: left;
+}
+
+#content>#center {
+	width: 910px;
+	height: 650px;
+	background: white;
+	float: right;
+	overflow: scroll;
+}
+
+/* footer {
+	width: 1100px;
+	height: 150px;
+	background: navy;
+	color: white;
+	margin: 0 auto;
+} */
+textarea {
+	height: 120px;
+}
+
+/*
+textarea:focus {
+	background: pink;	
+	height: 400px;
+}
+
+ input:focus {
+	background: pink;	
+}
+ 
+div:HOVER {
+	background: yellow;
+} */
+</style>
+
+<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+<script type="text/javascript">
+	jQuery.support.cors = true;
+	
+	var ServletIp = '12.34.56.78';	// Server IP address
+	var ServletPort = '8080';			// Server Port Number
+
+	function requestPost(responseForm, requestBody, requestUrl) {
+		$.ajax({
+			url : encodeURI("http://" + ServletIp + ":" + ServletPort + "/MotieApiTestPage/motie?url=" + requestUrl),
+			contentType : "application/json; charset=utf-8",
+			data : requestBody,
+			type : 'POST',
+			success : function(data) {
+				responseForm.val(data);
+			},
+			error : function(data, status, er) {
+				alert("status : " + status + "\n error msg :" + er);
+			}
+		});
+	};
+
+	function requestGet(responseForm, requestUrl) {
+		$.ajax({
+			url : encodeURI("http://" + ServletIp + ":" + ServletPort + "/MotieApiTestPage/motie"),
+			type : 'GET',
+			data : 'url=' + requestUrl,
+			success : function(data) {
+				responseForm.val(data);
+			},
+			error : function(data, status, er) {
+				alert("status : " + status + "\n error msg :" + er);
+			}
+		});
+	};
+	
+	function requestDelete(responseForm, requestUrl) {
+		$.ajax({
+			url : encodeURI("http://" + ServletIp + ":" + ServletPort + "/MotieApiTestPage/motie?url=" + requestUrl),
+			type : 'DELETE',
+			success : function(data) {
+				responseForm.val(data);
+			},
+			error : function(data, status, er) {
+				alert("status : " + status + "\n error msg :" + er);
+			}
+		});
+	};
+
+	$(document).ready(function() {
+		$('#JobCreateReq').click(function() {
+			var requestBody = $('#JobCreateReqBody').val();
+			var requestUrl = $('#JobCreateReqUrl').val();
+			requestPost($("#JobCreateResult"), requestBody, requestUrl);
+		});
+		$('#JobListReq').click(function() {
+			var requestUrl = $('#JobReadReqUrl').val();
+			requestGet($("#JobListResult"), requestUrl);
+		});
+		$('#JobReadReq').click(function() {
+			var requestUrl = $('#JobReadReqUrl').val();
+			requestGet($("#JobReadResult"), requestUrl);
+		});
+		$('#JobCancelReq').click(function() {
+			var requestUrl = $('#JobCancelReqUrl').val();
+			requestDelete($("#JobCancelResult"), requestUrl);
+		});
+		$('#PresetCreateReq').click(function() {
+			var requestBody = $('#PresetCreateReqBody').val();
+			var requestUrl = $('#PresetCreateReqUrl').val();
+			requestPost($("#PresetCreateResult"), requestBody, requestUrl);
+		});
+		$('#PresetListReq').click(function() {
+			var requestUrl = $('#PresetListReqUrl').val();
+			requestGet($("#PresetListResult"), requestUrl);
+		});
+		$('#PresetReadReq').click(function() {
+			var requestUrl = $('#PresetReadReqUrl').val();
+			requestGet($("#PresetReadResult"), requestUrl);
+		});
+		$('#PresetDeleteReq').click(function() {
+			var requestUrl = $('#PresetDeleteReqUrl').val();
+			requestDelete($("#PresetDeleteResult"), requestUrl);
+		});
+	});
+</script>
+</head>
+<body>
+
+	<header>Mcoder Api Test Page!</header>
+
+	<div id="content">
+		<div id="left">
+			<ul>
+				<li><a href="#section1">Job Create Request</a></li>
+				<li><a href="#section2">Job List Request</a></li>
+				<li><a href="#section3">Job Read Request</a></li>
+				<li><a href="#section4">Job Cancel Request</a></li>
+				<li><a href="#section5">Preset Create Request</a></li>
+				<li><a href="#section6">Preset List Request</a></li>
+				<li><a href="#section7">Preset Read Request</a></li>
+				<li><a href="#section8">Preset Delete Request</a></li>
+			</ul>
+		</div>
+		<div id="center">
+			<div>
+				<a id="section1"></a>
+				<h3>1. Job Create Request Example (Post)</h3>
+				<ul>
+					<li>Request<br> <input type="text" id="JobCreateReqUrl"
+						style="width: 750px;" value="http://12.34.56.78:8081/v1/jobs">
+						<input type="button" id="JobCreateReq" value="send"> <!-- <textarea id="JobCreateReqBody" style="width: 800px; height: 520px;"> -->
+						<textarea id="JobCreateReqBody" style="width: 800px;">
+{
+	"Input" : {
+		"Url" : "s3drive/uploaded/test.mp4"
+	},
+	"OutputUrlPrefix" : "s3drive/",
+	"Outputs" : [{
+			"Key" : "test-transcoded-1",
+			"ThumbnailPattern" : "pattern",
+			"PresetId" : "iPhone",
+			"SegmentDuration" : "20",
+			"Composition" : [{
+					"StartTime" : "0",
+					"Duration" : "00:00:10.000"
+				}, {
+					"StartTime" : "00:00:15:000",
+					"Duration" : "00:20:00.78"
+				}
+			],
+			"Captions" : {
+				"CaptionSources" : [{
+						"Url" : "s3drive/uploaded/test.smi",
+						"Language" : "Korean",
+						"TimeOffset" : "+00:00:00.12"
+					}, {
+						"Url" : "http://1.2.3.4:8000/test-eng.smi",
+						"Language" : "English",
+						"TimeOffset" : "+00:00:00.12"
+					}
+				]
+			}
+		}, {
+			"Key" : "test-transcoded-2.mp4",
+			"ThumbnailPattern" : "pattern",
+			"PresetId" : "m4a",
+			"SegmentDuration" : "30",
+			"Composition" : [{
+					"StartTime" : "0",
+					"Duration" : "1:23:45.678"
+				}, {
+					"StartTime" : "1:23:45:679",
+					"Duration" : "2:34:56.78"
+				}
+			],
+			"Captions" : {
+				"CaptionSources" : [{
+						"Url" : "http://1.2.3.4:8000/test-kor.smi",
+						"Language" : "Korean",
+						"TimeOffset" : "+00:00:00.12"
+					}, {
+						"Url" : "http://1.2.3.4:8000/test-eng.smi",
+						"Language" : "English",
+						"TimeOffset" : "+00:00:00.12"
+					}
+				]
+			}
+		}
+	],
+	"Playlists" : [{
+			"Format" : "HLSv3",
+			"Name" : "MyPlaylist1",
+			"OutputKeys" : [
+				"test/mobile-1024k",
+				"test/mobile-512k"
+			]
+		}
+	]
+}
+</textarea>
+					</li>
+					<li>Response<br> <textarea id="JobCreateResult"
+							style="width: 800px; height: 120px;"></textarea>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<a id="section2"></a>
+				<h3>2. Job List Request Example (Get)</h3>
+				<ul>
+					<li>Request<br> <input type="text" id="JobListReqUrl"
+						style="width: 750px;"
+						value="http://12.34.56.78:8081/v1/jobs/status=Progressing&page=TestMessage">
+						<input type="button" id="JobListReq" value="send">
+					</li>
+					<li>Response<br> <textarea id="JobListResult"
+							style="width: 800px; height: 120px;"></textarea>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<a id="section3"></a>
+				<h3>3. Job Read Request Example (Get)</h3>
+				<ul>
+					<li>Request<br> <input type="text" id="JobReadReqUrl"
+						style="width: 750px;"
+						value="http://12.34.56.78:8081/v1/jobs/MyJobId"> <input
+						type="button" id="JobReadReq" value="send">
+					</li>
+					<li>Response<br> <textarea id="JobReadResult"
+							style="width: 800px; height: 120px;"></textarea>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<a id="section4"></a>
+				<h3>4. Job Cancel Request Example (Get)</h3>
+				<ul>
+					<li>Request<br> <input type="text" id="JobCancelReqUrl"
+						style="width: 750px;"
+						value="http://12.34.56.78.235:8081/v1/jobs/CancelJobId"> <input
+						type="button" id="JobCancelReq" value="send">
+					</li>
+					<li>Response<br> <textarea id="JobCancelResult"
+							style="width: 800px; height: 120px;"></textarea>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<a id="section5"></a>
+				<h3>5. Preset Create Request Example (Post)</h3>
+				<ul>
+					<li>Request<br> <input type="text"
+						id="PresetCreateReqUrl" style="width: 750px;"
+						value="http://12.34.56.78:8081/v1/jobs"> <input
+						type="button" id="PresetCreateReq" value="send"> <textarea
+							id="PresetCreateReqBody" style="width: 800px; height: 120px;">
+{
+	"Name" : "MyPhonePreset",
+	"Description" : "My mobile phone preset.",
+	"Container" : "mp4",
+	"Audio" : {
+		"Codec" : "aac",
+		"CodecOptions" : {
+			"Profile" : "auto"
+		},
+		"SampleRate" : "48000",
+		"BitRate" : "1234",
+		"Channels" : "2",
+		"Gain" : "-3",
+		"Normalize" : "false",
+		"Base" : "-1",
+		"Treble" : "10",
+		"FadeIn" : "15.5",
+		"FadeOut" : "15"
+	},
+	"Video" : {
+		"Codec" : "h264",
+		"CodecOptions" : {
+			"Preset" : "veryfast",
+			"Profile" : "baseline",
+			"Level" : "h264 level",
+			"ExtraOptions" : "30"
+		},
+		"Width" : "4096",
+		"Height" : "3072",
+		"AspectMode" : "preserve",
+		"BitRate" : "auto",
+		"FrameRate" : "29.97",
+		"MaxFrameRate" : "60",
+		"KeyFrameInterval" : "5",
+		"Rotate" : "0",
+		"Deinterlace" : "on",
+		"Sharpen" : "false",
+		"Denoise" : "medium",
+		"Autolevel" : "true"
+	},
+	"Thumbnails" : {
+		"Format" : "png",
+		"StartTime" : "3",
+		"Interval" : "600",
+		"Width" : "4096",
+		"Height" : "3072",
+		"AspectMode" : "crop"
+	}
+}
+</textarea>
+					</li>
+					<li>Response<br> <textarea id="PresetCreateResult"
+							style="width: 800px; height: 120px;"></textarea>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<a id="section6"></a>
+				<h3>6. Preset List Request Example (Get)</h3>
+				<ul>
+					<li>Request<br> <input type="text" id="PresetListReqUrl"
+						style="width: 750px;"
+						value="http://12.34.56.78:8081/v1/presets?page=PageMessage">
+						<input type="button" id="PresetListReq" value="send">
+					</li>
+					<li>Response<br> <textarea id="PresetListResult"
+							style="width: 800px; height: 120px;"></textarea>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<a id="section7"></a>
+				<h3>7. Preset Read Request Example (Get)</h3>
+				<ul>
+					<li>Request<br> <input type="text" id="PresetReadReqUrl"
+						style="width: 750px;"
+						value="http://12.34.56.78:8081/v1/presets/MyPresetId"> <input
+						type="button" id="PresetReadReq" value="send">
+					</li>
+					<li>Response<br> <textarea id="PresetReadResult"
+							style="width: 800px; height: 120px;"></textarea>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<a id="section8"></a>
+				<h3>8. Preset Delete Request Example (Get)</h3>
+				<ul>
+					<li>Request<br> <input type="text"
+						id="PresetDeleteReqUrl" style="width: 750px;"
+						value="http://12.34.56.78:8081/v1/presets/MyPresetId"> <input
+						type="button" id="PresetDeleteReq" value="send">
+					</li>
+					<li>Response<br> <textarea id="PresetDeleteResult"
+							style="width: 800px; height: 120px;"></textarea>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<footer> </footer>
+
+
+</body>
+</html>

@@ -35,26 +35,25 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
 /**
  * Servlet implementation class McoderApiTest
  */
 @WebServlet("/motie")
 public class McoderApiTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public McoderApiTest() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public McoderApiTest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
+	protected void doDelete(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
 		@SuppressWarnings("resource")
 		HttpClient httpclient = new DefaultHttpClient();
 		String responseBody = "";
@@ -64,9 +63,9 @@ public class McoderApiTest extends HttpServlet {
 		try {
 			HttpDelete httpDelete = new HttpDelete(url);
 			ResponseHandler<String> handler = new BasicResponseHandler();
-	        HttpResponse httpResponse = httpclient.execute(httpDelete);
-	        HttpEntity entity = httpResponse.getEntity();
-	        responseBody = EntityUtils.toString(entity);
+			HttpResponse httpResponse = httpclient.execute(httpDelete);
+			HttpEntity entity = httpResponse.getEntity();
+			responseBody = EntityUtils.toString(entity);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,14 +75,16 @@ public class McoderApiTest extends HttpServlet {
 		out = response.getWriter();
 		out.println(responseBody);
 
-      return;
+		return;
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@SuppressWarnings("deprecation")
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
 		@SuppressWarnings("resource")
 		HttpClient httpclient = new DefaultHttpClient();
@@ -95,19 +96,19 @@ public class McoderApiTest extends HttpServlet {
 		try {
 			HttpResponse execute = httpclient.execute(get);
 			InputStream content = execute.getEntity().getContent();
-			
-			BufferedReader buffer = new BufferedReader(
-					new InputStreamReader(content));
-			
+
+			BufferedReader buffer = new BufferedReader(new InputStreamReader(
+					content));
+
 			String sTmp = "";
 			while ((sTmp = buffer.readLine()) != null) {
 				responseBody += sTmp;
 			}
 
 		} catch (Exception e) {
-				e.printStackTrace();
+			e.printStackTrace();
 		}
-		
+
 		PrintWriter out;
 		out = response.getWriter();
 		out.println(responseBody);
@@ -116,38 +117,40 @@ public class McoderApiTest extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@SuppressWarnings("deprecation")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
 		String requestUrl = request.getParameter("url");
-		
+
 		@SuppressWarnings("resource")
 		HttpClient httpclient = new DefaultHttpClient();
 		String responseBody = "";
-	    HttpPost post;
+		HttpPost post;
 
-	    StringBuilder stringBuilder = new StringBuilder(1000);
-	    Scanner scanner = new Scanner(request.getInputStream());
-	    while (scanner.hasNextLine()) {
-	        stringBuilder.append(scanner.nextLine());
-	        }
-	            
-	    post = new HttpPost(requestUrl);
-	            
-	    String Responsebody = stringBuilder.toString();
-	            
-	    post.setEntity(new StringEntity(Responsebody, 
-	                             ContentType.create("application/json")));
-	    
-	    ResponseHandler<String> responseHandler = new BasicResponseHandler();
-	    responseBody = httpclient.execute(post, responseHandler);
-	         	            
-	    PrintWriter out;
-	    out = response.getWriter();
-	    out.println(responseBody);
+		StringBuilder stringBuilder = new StringBuilder(1000);
+		Scanner scanner = new Scanner(request.getInputStream());
+		while (scanner.hasNextLine()) {
+			stringBuilder.append(scanner.nextLine());
+		}
 
-	    return;
-	    }                  
+		post = new HttpPost(requestUrl);
+
+		String Responsebody = stringBuilder.toString();
+
+		post.setEntity(new StringEntity(Responsebody, ContentType
+				.create("application/json")));
+
+		ResponseHandler<String> responseHandler = new BasicResponseHandler();
+		responseBody = httpclient.execute(post, responseHandler);
+
+		PrintWriter out;
+		out = response.getWriter();
+		out.println(responseBody);
+
+		return;
 	}
+}

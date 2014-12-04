@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -197,63 +197,18 @@ div:HOVER {
 	"Outputs" : [{
 			"Key" : "test-transcoded-1",
 			"ThumbnailPattern" : "pattern",
-			"PresetId" : "iPhone",
-			"SegmentDuration" : "20",
-			"Composition" : [{
-					"StartTime" : "0",
-					"Duration" : "00:00:10.000"
-				}, {
-					"StartTime" : "00:00:15:000",
-					"Duration" : "00:20:00.78"
-				}
-			],
+			"PresetId" : "webm",			
 			"Captions" : {
 				"CaptionSources" : [{
-						"Url" : "s3drive/uploaded/test.smi",
-						"Language" : "Korean",
-						"TimeOffset" : "+00:00:00.12"
-					}, {
-						"Url" : "http://1.2.3.4:8000/test-eng.smi",
-						"Language" : "English",
-						"TimeOffset" : "+00:00:00.12"
-					}
-				]
+						"Url" : "s3drive/uploaded/test.smi"
+					}  		
+				]		
 			}
 		}, {
-			"Key" : "test-transcoded-2.mp4",
+			"Key" : "test-transcoded-2",
 			"ThumbnailPattern" : "pattern",
-			"PresetId" : "m4a",
-			"SegmentDuration" : "30",
-			"Composition" : [{
-					"StartTime" : "0",
-					"Duration" : "1:23:45.678"
-				}, {
-					"StartTime" : "1:23:45:679",
-					"Duration" : "2:34:56.78"
-				}
-			],
-			"Captions" : {
-				"CaptionSources" : [{
-						"Url" : "http://1.2.3.4:8000/test-kor.smi",
-						"Language" : "Korean",
-						"TimeOffset" : "+00:00:00.12"
-					}, {
-						"Url" : "http://1.2.3.4:8000/test-eng.smi",
-						"Language" : "English",
-						"TimeOffset" : "+00:00:00.12"
-					}
-				]
-			}
-		}
-	],
-	"Playlists" : [{
-			"Format" : "HLSv3",
-			"Name" : "MyPlaylist1",
-			"OutputKeys" : [
-				"test/mobile-1024k",
-				"test/mobile-512k"
-			]
-		}
+			"PresetId" : "m4a"
+		} 
 	]
 }
 </textarea>
@@ -320,47 +275,28 @@ div:HOVER {
 	"Container" : "mp4",
 	"Audio" : {
 		"Codec" : "aac",
-		"CodecOptions" : {
-			"Profile" : "auto"
-		},
 		"SampleRate" : "48000",
-		"BitRate" : "1234",
-		"Channels" : "2",
-		"Gain" : "-3",
-		"Normalize" : "false",
-		"Base" : "-1",
-		"Treble" : "10",
-		"FadeIn" : "15.5",
-		"FadeOut" : "15"
+		"BitRate" : "192000",
+		"Channels" : "2"
 	},
 	"Video" : {
 		"Codec" : "h264",
 		"CodecOptions" : {
 			"Preset" : "veryfast",
 			"Profile" : "baseline",
-			"Level" : "h264 level",
-			"ExtraOptions" : "30"
+			"ExtraOptions" : "cabac=0:bframes=0:ref=1:8x8dct=0:weightp=0:keyint=30"
 		},
-		"Width" : "4096",
-		"Height" : "3072",
-		"AspectMode" : "preserve",
-		"BitRate" : "auto",
-		"FrameRate" : "29.97",
-		"MaxFrameRate" : "60",
-		"KeyFrameInterval" : "5",
-		"Rotate" : "0",
-		"Deinterlace" : "on",
-		"Sharpen" : "false",
-		"Denoise" : "medium",
-		"Autolevel" : "true"
+		"Width" : "960",
+		"Height" : "540",		
+		"BitRate" : "1500000",
+		"FrameRate" : "29.97"
 	},
 	"Thumbnails" : {
 		"Format" : "png",
-		"StartTime" : "3",
-		"Interval" : "600",
-		"Width" : "4096",
-		"Height" : "3072",
-		"AspectMode" : "crop"
+		"StartTime" : "0.8",
+		"Interval" : "30",
+		"Width" : "320",
+		"Height" : "240"		
 	}
 }
 </textarea>

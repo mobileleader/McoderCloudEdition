@@ -30,40 +30,41 @@
       <section>
         
 <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Information</h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mcoder Cloud Edition</h3>
 
-<p>"Mocder Cloud Edition" is a transcoding software that support various audio and video formats and convert to runs on devices. It offers REST APIs to transcoding operations and maintenance services. And Using predefined presets easily make encoding options.</p>
+<p>"Mocder Cloud Edition" is a transcoding software that support various audio and video formats and convert to runs on devices. It offers REST APIs to transcoding operations and maintenance services. And Using predefined presets easily make encoding options.<br><br>
 
-<p>Mcoder Cloud Edition is cloud-based multimedia encoding solution
-Support various input & output format and codec.
-Available using REST Api.</p>
+ - Mcoder Cloud Edition is cloud-based multimedia encoding solution.<br>
+ - Support various input & output format and codec.<br>
+ - Available using REST Api.</p>
 
 <h3>
-<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Environnment Setting</h3>
+<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Environment Setting</h3>
 
-<p>How to change port number for Rest API server.
-Update in /home/ec2-user/msipTranscoder.xml
-(Run the first time transcoder if the msipTranscoder.xml is not exist)</p>
+<p>To change the port number for Rest API server.
+you must Update in /home/ec2-user/mcoderTranscoder.xml
+(Run the first time transcoder if the mcoderTranscoder.xml is not exist)</p>
 
-<pre><code><AppConfig>
-<server>
-<port>8081</port>
-</server>
-...
+<pre><xmp>
+<AppConfig>
+	<server>
+		<port>8081</port>
+	</server>
+	...
 </AppConfig>
-</code></pre>
+</xmp></pre>
 
 <p>Please refer to the document for Rest API to use.</p>
 
 <h3>
-<a id="rather-drive-stick" class="anchor" href="#rather-drive-stick" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mount s3 bucket(optional)</h3>
+<a id="rather-drive-stick" class="anchor" href="#rather-drive-stick" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mount S3 bucket(optional)</h3>
 
 <p>Edit a config file for storing your keys (you can check them out under AWS Menu -> Your Account -> Security Credentials)
 touch /etc/passwd-s3fs && chmod 640 /etc/passwd-s3fs && echo 'AccessKey:SecretKey' > /etc/passwd-s3fs
-If you dont want to leave any trace of your secret key in your shell history, use a text editor to edit the file rather than echoing it.
+If you dont want to leave any trace of your secret key in your shell history, use a text editor to edit the file rather than echoing it.<br>
 
 Create a directory for mounting the S3 filesystem and mount it. Note that you can mount the s3fs anywhere you like:
-/usr/bin/s3fs bucketname /mnt/mountpoint
+/usr/bin/s3fs bucketname /mnt/mountpoint<br>
 
 Check it is woking correctly:
 grep s3fs /etc/mtab</p>
@@ -75,16 +76,15 @@ grep s3fs /etc/mtab</p>
 
 <p><a href="document/McoderRestAPIs.pdf">McoderRestAPIs.pdf</a></p>
 
-<h3>
 
 <h3>
-<a id="License" class="anchor" href="#License" aria-hidden="true"><span class="octicon octicon-link"></span></a>License </h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h3>
 
-<p>You can use x264 library, for H.264 encoding. and you must check x264 license for commercial usage.
-http://x264licensing.com/
+<p>You can use x264 library, for H.264 encoding. and you must check x264 license for commercial usage.<br>
+<a href="http://x264licensing.com/">http://x264licensing.com/</a></p>
 
-Also you can see summary of AVC/H.264 license terms at
-http://www.mpegla.com/main/programs/AVC/Documents/AVC_TermsSummary.pdf</p>
+<p>Also you can see summary of AVC/H.264 license terms at
+<a href="http://www.mpegla.com/main/programs/AVC/Documents/AVC_TermsSummary.pdf">http://www.mpegla.com/main/programs/AVC/Documents/AVC_TermsSummary.pdf</a></p>
 
 <h3>
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>

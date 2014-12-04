@@ -54,27 +54,24 @@ you must Update in /home/ec2-user/mcoderTranscoder.xml
 </AppConfig>
 </xmp></pre>
 
-<p>Please refer to the document for Rest API to use.</p>
-
 <h3>
 <a id="rather-drive-stick" class="anchor" href="#rather-drive-stick" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mount S3 bucket(optional)</h3>
 
 <p>Edit a config file for storing your keys (you can check them out under AWS Menu -> Your Account -> Security Credentials)
-touch /etc/passwd-s3fs && chmod 640 /etc/passwd-s3fs && echo 'AccessKey:SecretKey' > /etc/passwd-s3fs
+<pre>touch /etc/passwd-s3fs && chmod 640 /etc/passwd-s3fs && echo 'AccessKey:SecretKey' > /etc/passwd-s3fs</pre>
 If you dont want to leave any trace of your secret key in your shell history, use a text editor to edit the file rather than echoing it.<br>
 
 Create a directory for mounting the S3 filesystem and mount it. Note that you can mount the s3fs anywhere you like:
-/usr/bin/s3fs bucketname /mnt/mountpoint<br>
+<pre>/usr/bin/s3fs bucketname /mnt/mountpoint</pre><br>
 
 Check it is woking correctly:
-grep s3fs /etc/mtab</p>
+<pre>grep s3fs /etc/mtab</pre></p>
 
 <h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rest APIs</h3>
 
-<p>The API provides request for Transcoding. For more information about Rest APIs please read the following document.</p>
-
-<p><a href="document/McoderRestAPIs.pdf">McoderRestAPIs.pdf</a></p>
+<p>The API provides request for Transcoding. For more information about Rest APIs please read the following document.<br>
+<a href="document/McoderRestAPIs.pdf">McoderRestAPIs.pdf</a></p>
 
 
 <h3>
@@ -90,7 +87,7 @@ grep s3fs /etc/mtab</p>
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
 <p>if you're looking for more help or have a question to ask, please contact us.
-If you're in need of technical support, please contact us. mcoder_support@mobileleader.com</p>
+If you're in need of technical support, please contact us. <a href="mailto:mcoder_support@mobileleader.com">mcoder_support@mobileleader.com</a></p>
 
       </section>
       <footer>

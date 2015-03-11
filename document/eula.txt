@@ -1,0 +1,14 @@
+
+1. Under this Software License Agreement(the "Agreement"), Mobileleader(the "Vender") grants to the user(the "Licensee") a non-exclusive and non-transferable license(the "License") to use Mcoder Cloud Edition(the "Software").
+
+2. Title, copyright, intellectual property rights and distribution rights of the Software remain exclusively with the Vendor. Intellectual property rights include the look and feel of the Software. This Agreement constitutes a license for use only and is not in any way a transfer of ownership rights to the Software
+
+3. The Software may be loaded onto no more than one single cloud instance. The Licensee may not obtain any rights in the Software except those given in this limited license.
+
+4. The rights and obligations of this Agreement are personal rights granted to the Licensee only. The Licensee may not transfer or assign any of the rights or obligations granted under this Agreement to any other person or legal entity. The Licensee may not make available the Software for use by one or more third parties.
+
+5. The Software may not be modified, reverse-engineered, or de-compiled in any manner throuth current or future available technologies.
+
+6. Failure to comply with any of the terms under the License section will be considered a material breach of this Agreement.
+
+
